@@ -5,6 +5,7 @@
     --violetDiscord: #7289da;
 }
 .body {
+    background-image: url("img/fond_d_ecran_dos_de_dragon.png");
     background-color: var(--backgroundColor) ;
     border: 1px none;
     display: flex;

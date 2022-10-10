@@ -1,5 +1,7 @@
 const path = require('path');
 const express = require('express');
+const fs = require('fs');
+const sqlite3 = require('sqlite3').verbose();
 
 const app = express();
 
@@ -35,9 +37,32 @@ app.get('/icons/discordIcon.ico', (request, response) => {
     console.log(`GET /icons/discordIcon.ico`);
 	return response.sendFile('discordIcon.ico', { root: './icons' });
 });
+app.get('/img/fond_d_ecran_dos_de_dragon.png', (request, response) => {
+    console.log(`GET /img/fond_d_ecran_dos_de_dragon`);
+	return response.sendFile('fond_d_ecran_dos_de_dragon.png', { root: './img' });
+});
 
 app.get('/auth/discord', (request, response) => {
     console.log(`GET /auth/discord`);
+    let dbp = new sqlite3.Database('./ressources/people.db',sqlite3.OPEN_CREATE, (err) => {
+        if (err) {
+          return console.error(err.message);
+        }
+        console.log('Connected to the people database.');
+      });
+    //   dbp.serialize(() => {
+    //     dbp.each(`SELECT`,params,(err,rows)=>{
+    //         ytfy;
+    //     });
+    //   });
+      // close the database connection
+      dbp.close((err) => {
+        if (err) {
+          return console.error(err.message);
+        }
+        console.log('Close the people database connection.');
+      });
+      
 	return response.sendFile('ChoosePage.html', { root: './src' });
 });
 
